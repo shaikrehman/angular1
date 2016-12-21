@@ -1,1 +1,0 @@
-angular1 is a sample project.
