@@ -102,6 +102,19 @@ angular.module("crudApp", [])
             });
         }
     };
+
+    // Reset form data 
+    $scope.resetForm = function(){
+        $scope.tempUserData = {};
+        $('.formData').slideUp();
+    };
+
+    // Add new user button
+    $scope.addNew = function(){
+        $scope.tempUserData = {};
+        $('.formData').slideToggle();
+        $('.formData').slideDown();
+    };
     
     // function to display success message
     $scope.messageSuccess = function(msg){

@@ -16,24 +16,24 @@
 <div class="container" ng-controller="userController" ng-init="getRecords()">
     <div class="row">
         <div class="panel panel-default users-content">
-            <div class="panel-heading">Users <a href="javascript:void(0);" class="glyphicon glyphicon-plus" onclick="$('.formData').slideToggle();"></a></div>
+            <div class="panel-heading">Users <a href="javascript:void(0);" class="glyphicon glyphicon-plus" ng-click="addNew()"></a></div>
             <div class="alert alert-danger none"><p></p></div>
             <div class="alert alert-success none"><p></p></div>
             <div class="panel-body none formData">
                 <form class="form" name="userForm">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" ng-model="tempUserData.name"/>
+                        <input type="text" class="form-control" name="name" ng-model="tempUserData.name" required />
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control" name="email" ng-model="tempUserData.email"/>
+                        <input type="text" class="form-control" name="email" ng-model="tempUserData.email" required />
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
-                        <input type="text" class="form-control" name="phone" ng-model="tempUserData.phone"/>
+                        <input type="text" class="form-control" name="phone" ng-model="tempUserData.phone" required />
                     </div>
-                    <a href="javascript:void(0);" class="btn btn-warning" onclick="$('.formData').slideUp();">Cancel</a>
+                    <a href="javascript:void(0);" class="btn btn-warning" ng-click="resetForm()">Cancel</a>
                     <a href="javascript:void(0);" class="btn btn-success" ng-hide="tempUserData.id" ng-click="addUser()">Add User</a>
                     <a href="javascript:void(0);" class="btn btn-success" ng-hide="!tempUserData.id" ng-click="updateUser()">Update User</a>
                 </form>
@@ -47,6 +47,7 @@
                     <th width="14%">Created</th>
                     <th width="10%"></th>
                 </tr>
+                <!--<tr ng-if="noData"><td colspan="6">{{noData}}</td></tr>-->
                 <tr ng-repeat="user in users | orderBy:'-created'">
                     <td>{{$index + 1}}</td>
                     <td>{{user.name}}</td>
