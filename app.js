@@ -2,7 +2,22 @@
 angular.module("crudApp", [])
 .controller("userController", function($scope,$http){
     $scope.users = [];
+    $scope.country = [];
     $scope.tempUserData = {};
+
+    // function to set the country dropdown from the database
+    $scope.getCountryCode = function(type){
+        $http.get('action.php', {
+            params:{
+                'type':type
+            }
+        }).success(function(response){
+            if(response.status == 'OK'){
+                $scope.country = response.records;
+            }
+        });
+    };
+
     // function to get records from the database
     $scope.getRecords = function(){
         $http.get('action.php', {
@@ -34,6 +49,8 @@ angular.module("crudApp", [])
                     $scope.users[$scope.index].name = $scope.tempUserData.name;
                     $scope.users[$scope.index].email = $scope.tempUserData.email;
                     $scope.users[$scope.index].phone = $scope.tempUserData.phone;
+                    $scope.users[$scope.index].gender = $scope.tempUserData.gender;
+                    $scope.users[$scope.index].country = $scope.tempUserData.country;
                     $scope.users[$scope.index].created = $scope.tempUserData.created;
                 }else{
                     $scope.users.push({
@@ -41,6 +58,8 @@ angular.module("crudApp", [])
                         name:response.data.name,
                         email:response.data.email,
                         phone:response.data.phone,
+                        gender:response.data.gender,
+                        country:response.data.country,
                         created:response.data.created
                     });
                     
@@ -67,6 +86,8 @@ angular.module("crudApp", [])
             name:user.name,
             email:user.email,
             phone:user.phone,
+            gender:user.gender,
+            country:user.country_code,
             created:user.created
         };
         $scope.index = $scope.users.indexOf(user);
@@ -115,7 +136,7 @@ angular.module("crudApp", [])
         $('.formData').slideToggle();
         $('.formData').slideDown();
     };
-    
+    $scope.getCountryCode('getCountry');
     // function to display success message
     $scope.messageSuccess = function(msg){
         $('.alert-success > p').html(msg);

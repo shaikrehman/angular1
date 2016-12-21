@@ -2,9 +2,21 @@
 include 'DB.php';
 $db = new DB();
 $tblName = 'users';
+$countryTable = 'country';
 if(isset($_REQUEST['type']) && !empty($_REQUEST['type'])){
     $type = $_REQUEST['type'];
     switch($type){
+        case "getCountry":
+            $records = $db->getCountry($countryTable);
+            if($records){
+                $data['records'] = $db->getCountry($countryTable);
+                $data['status'] = 'OK';
+            }else{
+                $data['records'] = array();
+                $data['status'] = 'ERR';
+            }
+            echo json_encode($data);
+            break;
         case "view":
             $records = $db->getRows($tblName);
             if($records){
@@ -21,7 +33,9 @@ if(isset($_REQUEST['type']) && !empty($_REQUEST['type'])){
                 $userData = array(
                     'name' => $_POST['data']['name'],
                     'email' => $_POST['data']['email'],
-                    'phone' => $_POST['data']['phone']
+                    'phone' => $_POST['data']['phone'],
+                    'gender' => $_POST['data']['gender'],
+                    'country_code' => $_POST['data']['country']
                 );
                 $insert = $db->insert($tblName,$userData);
                 if($insert){
@@ -43,7 +57,8 @@ if(isset($_REQUEST['type']) && !empty($_REQUEST['type'])){
                 $userData = array(
                     'name' => $_POST['data']['name'],
                     'email' => $_POST['data']['email'],
-                    'phone' => $_POST['data']['phone']
+                    'phone' => $_POST['data']['phone'],
+                    'gender' => $_POST['data']['gender']
                 );
                 $condition = array('id' => $_POST['data']['id']);
                 $update = $db->update($tblName,$userData,$condition);

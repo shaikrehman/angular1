@@ -33,6 +33,20 @@
                         <label>Phone</label>
                         <input type="text" class="form-control" name="phone" ng-model="tempUserData.phone" required />
                     </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select class="form-control" name="gender" ng-model="tempUserData.gender">
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <select class="form-control" name="country" ng-model="tempUserData.country">
+                            <option>Select</option>
+                            <option ng-repeat="x in country" value="{{x.id">{{x.country_name}}</option>
+                        </select>
+                    </div>
                     <a href="javascript:void(0);" class="btn btn-warning" ng-click="resetForm()">Cancel</a>
                     <a href="javascript:void(0);" class="btn btn-success" ng-hide="tempUserData.id" ng-click="addUser()">Add User</a>
                     <a href="javascript:void(0);" class="btn btn-success" ng-hide="!tempUserData.id" ng-click="updateUser()">Update User</a>
@@ -42,10 +56,12 @@
                 <tr>
                     <th width="5%">#</th>
                     <th width="20%">Name</th>
-                    <th width="30%">Email</th>
-                    <th width="20%">Phone</th>
+                    <th width="20%">Email</th>
+                    <th width="10%">Phone</th>
+                    <th width="10%">Gender</th>
+                    <th width="10%">Country</th>
                     <th width="14%">Created</th>
-                    <th width="10%"></th>
+                    <th width="10%">Action</th>
                 </tr>
                 <!--<tr ng-if="noData"><td colspan="6">{{noData}}</td></tr>-->
                 <tr ng-repeat="user in users | orderBy:'-created'">
@@ -53,6 +69,8 @@
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.phone}}</td>
+                    <td>{{user.gender == 1 ? "Male" : "Female"}}</td>
+                    <td>{{user.country_code}}</td>
                     <td>{{user.created}}</td>
                     <td>
                         <a href="javascript:void(0);" class="glyphicon glyphicon-edit" ng-click="editUser(user)"></a>
