@@ -58,7 +58,8 @@ if(isset($_REQUEST['type']) && !empty($_REQUEST['type'])){
                     'name' => $_POST['data']['name'],
                     'email' => $_POST['data']['email'],
                     'phone' => $_POST['data']['phone'],
-                    'gender' => $_POST['data']['gender']
+                    'gender' => $_POST['data']['gender'],
+                    'country_code' => $_POST['data']['country'],
                 );
                 $condition = array('id' => $_POST['data']['id']);
                 $update = $db->update($tblName,$userData,$condition);
