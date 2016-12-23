@@ -62,7 +62,6 @@
                     <th width="14%">Created</th>
                     <th width="10%">Action</th>
                 </tr>
-                <!--<tr ng-if="noData"><td colspan="6">{{noData}}</td></tr>-->
                 <tr ng-repeat="user in users | orderBy:'-created'">
                     <td>{{$index + 1}}</td>
                     <td>{{user.name}}</td>

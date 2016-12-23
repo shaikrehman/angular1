@@ -2,7 +2,6 @@
 angular.module("crudApp", [])
 .controller("userController", function($scope,$http){
     $scope.users = [];
-    $scope.country = [];
     $scope.tempUserData = {};
 
     // function to set the country dropdown from the database
@@ -27,6 +26,7 @@ angular.module("crudApp", [])
         }).success(function(response){
             if(response.status == 'OK'){
                 $scope.users = response.records;
+                console.log($scope.users);
             }
         });
     };
@@ -50,8 +50,9 @@ angular.module("crudApp", [])
                     $scope.users[$scope.index].email = $scope.tempUserData.email;
                     $scope.users[$scope.index].phone = $scope.tempUserData.phone;
                     $scope.users[$scope.index].gender = $scope.tempUserData.gender;
-                    $scope.users[$scope.index].country = $scope.tempUserData.country;
+                    $scope.users[$scope.index].country_code = $scope.tempUserData.country_code;
                     $scope.users[$scope.index].created = $scope.tempUserData.created;
+
                 }else{
                     $scope.users.push({
                         id:response.data.id,
@@ -59,17 +60,20 @@ angular.module("crudApp", [])
                         email:response.data.email,
                         phone:response.data.phone,
                         gender:response.data.gender,
-                        country:response.data.country,
+                        country_code:response.data.country_code,
                         created:response.data.created
                     });
+                    
                     
                 }
                 $scope.userForm.$setPristine();
                 $scope.tempUserData = {};
                 $('.formData').slideUp();
                 $scope.messageSuccess(response.msg);
+                console.log(response.msg);
             }else{
                 $scope.messageError(response.msg);
+               // console.log(response.msg);
             }
         });
     };

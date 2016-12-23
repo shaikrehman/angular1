@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="html/text; charset=UTF-8" />
+<title>user form</title>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="angular-1.5.7.min.js"></script>
+<script src="app.js"></script>
+</head>
+<body>
+	<div class="container" ng-app="myApp" ng-controller="myCtrl">
+	  	<h2>User Form</h2>
+	  	<form class="form-horizontal" name="user_form" ng-submit="addUser()">
+	  		<div class="form-group">
+		      	<label class="control-label col-sm-2">Name:</label>
+		      	<div class="col-sm-10">
+		        	<input type="text" class="form-control" id="name" placeholder="Enter name" ng-model="user.name">
+		      	</div>
+		    </div>
+		    <div class="form-group">
+		      	<label class="control-label col-sm-2">Country:</label>
+		      	<div class="col-sm-10">
+		        	<select class="form-control" name="country" ng-model="user.country">
+		        		<option ng-repeat="x in countries" value="{{x.id}}">{{x.country_name}}</option>
+                    </select>
+		      	</div>
+		    </div>
+		    <div class="form-group">
+		      	<label class="control-label col-sm-2">Email:</label>
+		      	<div class="col-sm-10">
+		        	<input type="text" class="form-control" id="email" placeholder="Enter email" ng-model="user.email">
+		      	</div>
+		    </div>
+		    <div class="form-group">        
+		      	<div class="col-sm-offset-2 col-sm-10">
+		        	<button type="submit" class="btn btn-default add-user">Add User</button>
+		        	<button class="btn btn-success hide update-user" ng-click="updateUser()" >Update User</button>
+		        	<button class="btn btn-default" ng-click="cancel()" >Cancel</button>
+		      	</div>
+		    </div>
+	  	</form>
+
+	  	<table class="table table-bordered">
+		    <thead>
+		      <tr>
+		        <th>#</th>
+		        <th>Name</th>
+		        <th>Country</th>
+		        <th>Email</th>
+		        <th>Action</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="users in users">
+		      	<td>{{users.id}}</td>
+		        <td>{{users.name}}</td>
+		        <td>{{users.country_name}}</td>
+		        <td>{{users.email}}</td>
+		        <td>
+		        	<a href="" class="glyphicon glyphicon-edit" ng-click="editUser(users)"></a>
+                    <a href="" class="glyphicon glyphicon-trash" ng-click="deleteUser(users)"></a>
+		        </td>
+		      </tr>
+		    </tbody>
+  		</table>
+
+	</div>
+</body>
+</html>
